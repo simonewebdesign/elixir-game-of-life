@@ -1,4 +1,4 @@
-defmodule GameOfLife.Application do
+defmodule Life.Application do
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -10,13 +10,13 @@ defmodule GameOfLife.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      # Starts a worker by calling: GameOfLife.Worker.start_link(arg1, arg2, arg3)
-      # worker(GameOfLife.Worker, [arg1, arg2, arg3]),
+      # Starts a worker by calling: Life.Worker.start_link(arg1, arg2, arg3)
+      # worker(Life.Worker, [arg1, arg2, arg3]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: GameOfLife.Supervisor]
+    opts = [strategy: :one_for_one, name: Life.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

@@ -1,6 +1,6 @@
-defmodule GameOfLife do
+defmodule Life do
   @moduledoc """
-  Documentation for GameOfLife.
+  Documentation for Life.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule GameOfLife do
 
   ## Examples
 
-      iex> GameOfLife.hello
+      iex> Life.hello
       :world
 
   """
