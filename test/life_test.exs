@@ -16,14 +16,14 @@ defmodule LifeTest do
   end
 
 
-  test "alive cell with 2 neighbours lives on to the next generation" do
+  test "alive cell with two neighbours lives on to the next generation" do
     alive_cells = [{0, 0}, {1, 0}, {2, 0}] |> MapSet.new
     expected_alive_cell = {1, 0}
     assert Life.tick(alive_cells) |> MapSet.member?(expected_alive_cell)
   end
 
 
-  test "dead cell with three live neighbours becomes a live cell" do
+  test "dead cell with three neighbours becomes a live cell" do
     alive_cells =
       [{0, 0}, {1, 0}, {2, 0}, {1, 1}]
       |> MapSet.new
