@@ -11,6 +11,7 @@ defmodule Table do
   @middle_left "╠"
   @middle_right "╣"
   @union_bottom "╩"
+  @union_middle "╬"
 
   def print() do
     :ok
@@ -53,6 +54,20 @@ defmodule Table do
     s = str <> empty_cell()
     do_center(data, s, n - 1)
   end
+
+
+  def middle(size) do
+    @middle_left <> do_middle("", size)
+  end
+
+  def do_middle(str, n) when n <= 1 do
+    str <> line() <> @middle_right
+  end
+  def do_middle(str, n) do
+    s = str <> line() <> @union_middle
+    do_middle(s, n - 1)
+  end
+
 
   defp line, do: duplicate(@horizontal, 3)
   defp empty_cell, do: duplicate(" ", 3) <> @vertical
