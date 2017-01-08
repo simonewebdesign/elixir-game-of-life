@@ -15,7 +15,7 @@ defmodule TableTest do
   @header "╔═══╦═══╦═══╗"
   @center "║   ║   ║   ║"
   @middle "╠═══╬═══╬═══╣"
-  # @centre "║   ║ █ ║   ║"
+  @centre "║   ║ █ ║   ║"
   @footer "╚═══╩═══╩═══╝"
 
   test "header" do
@@ -32,5 +32,10 @@ defmodule TableTest do
 
   test "middle" do
     assert @middle == Table.middle(@size)
+  end
+
+  test "center with data" do
+    data = [false, true, false]
+    assert @centre == Table.center(data, @size)
   end
 end

@@ -5,8 +5,8 @@ defmodule Table do
   @top_right "╗"
   @bottom_left "╚"
   @bottom_right "╝"
-  @horizontal "═"
-  @vertical "║"
+  @line "═══"
+  @pipe "║"
   @union_top "╦"
   @middle_left "╠"
   @middle_right "╣"
@@ -22,10 +22,10 @@ defmodule Table do
   end
 
   def do_header(str, n) when n <= 1 do
-    str <> line() <> @top_right
+    str <> @line <> @top_right
   end
   def do_header(str, n) do
-    s = str <> line() <> @union_top
+    s = str <> @line <> @union_top
     do_header(s, n - 1)
   end
 
@@ -35,23 +35,23 @@ defmodule Table do
   end
 
   def do_footer(str, n) when n <= 1 do
-    str <> line() <> @bottom_right
+    str <> @line <> @bottom_right
   end
   def do_footer(str, n) do
-    s = str <> line() <> @union_bottom
+    s = str <> @line <> @union_bottom
     do_footer(s, n - 1)
   end
 
 
   def center(data, size) do
-    @vertical <> do_center(data, "", size)
+    @pipe <> do_center(data, "", size)
   end
 
   def do_center(data, str, n) when n <= 1 do
-    str <> empty_cell()
+    str <> cell(false)
   end
   def do_center(data, str, n) do
-    s = str <> empty_cell()
+    s = str <> cell(false)
     do_center(data, s, n - 1)
   end
 
@@ -61,14 +61,14 @@ defmodule Table do
   end
 
   def do_middle(str, n) when n <= 1 do
-    str <> line() <> @middle_right
+    str <> @line <> @middle_right
   end
   def do_middle(str, n) do
-    s = str <> line() <> @union_middle
+    s = str <> @line <> @union_middle
     do_middle(s, n - 1)
   end
 
 
-  defp line, do: duplicate(@horizontal, 3)
-  defp empty_cell, do: duplicate(" ", 3) <> @vertical
+  defp cell(true), do: " █ #{@pipe}"
+  defp cell(false), do: "   #{@pipe}"
 end
