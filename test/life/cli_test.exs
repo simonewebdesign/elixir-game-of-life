@@ -23,6 +23,7 @@ defmodule CLITest do
   ╚═══╩═══╩═══╝
   """
 
+  @tag :skip
   test "prints an empty 3x3 grid" do
     assert @empty_grid ==
       capture_io(fn ->
@@ -30,6 +31,7 @@ defmodule CLITest do
       end)
   end
 
+  @tag :skip
   test "prints a 3x3 grid with a glider" do
     grid = [{1, 0}, {2, 1}, {0, 2}, {1, 2}, {2, 2}]
 
