@@ -13,7 +13,7 @@ defmodule TableTest do
   # ╚═══╩═══╩═══╝
   # """
   @header "╔═══╦═══╦═══╗"
-  # @center "║   ║   ║   ║"
+  @center "║   ║   ║   ║"
   # @middle "╠═══╬═══╬═══╣"
   # @centre "║   ║ █ ║   ║"
   @footer "╚═══╩═══╩═══╝"
@@ -24,5 +24,9 @@ defmodule TableTest do
 
   test "footer" do
     assert @footer == Table.footer(@size)
+  end
+
+  test "center" do
+    assert @center == Table.center([], @size)
   end
 end
