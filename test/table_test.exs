@@ -27,7 +27,8 @@ defmodule TableTest do
   end
 
   test "center" do
-    assert @center == Table.center([], @size)
+    data = [false, false, false]
+    assert @center == Table.center(data, @size)
   end
 
   test "middle" do

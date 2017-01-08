@@ -47,12 +47,12 @@ defmodule Table do
     @pipe <> do_center(data, "", size)
   end
 
-  def do_center(data, str, n) when n <= 1 do
-    str <> cell(false)
+  def do_center([h], str, n) when n <= 1 do
+    str <> cell(h)
   end
-  def do_center(data, str, n) do
-    s = str <> cell(false)
-    do_center(data, s, n - 1)
+  def do_center([h|t], str, n) do
+    s = str <> cell(h)
+    do_center(t, s, n - 1)
   end
 
 
