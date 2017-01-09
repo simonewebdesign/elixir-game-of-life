@@ -1,37 +1,11 @@
 defmodule Life.CLI do
 
-  @empty_grid """
-  ╔═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╗
-  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
-  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
-  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
-  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
-  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
-  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
-  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
-  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
-  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
-  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
-  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
-  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
-  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
-  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
-  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
-  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
-  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
-  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
-  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
-  ╚═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╝
-  """
-
-  @header "╔═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╗"
-  @center "║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║"
-  @middle "╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣"
-  @footer "╚═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╝"
+  @grid_size 10
+  @sleep_interval_ms 300
 
 
   def main([]) do
-    IO.write @empty_grid # TODO no need for an hardcoded grid here
+    "no life"
   end
   def main(["glider"]) do
     [{3, 0}, {4, 1}, {2, 2}, {3, 2}, {4, 2}]
@@ -40,30 +14,31 @@ defmodule Life.CLI do
   end
 
 
-  def loop(grid, interval \\ 1000) do
-    print(grid)
+  def loop(alive_cells, interval \\ @sleep_interval_ms) do
+    alive_cells
+    |> calc_grid()
+    |> Table.print()
 
     :timer.sleep(interval)
 
-    grid
+    alive_cells
     |> Life.tick()
     |> loop()
   end
 
 
-  def print(grid) do
-    IO.puts @header
-    do_print(@center, 10)
-    IO.puts @footer
-  end
-
-
-  defp do_print(str, n) when n <= 1 do
-    IO.puts str
-  end
-  defp do_print(str, n) do
-    IO.puts str <> "\n" <> @middle
-    do_print(str, n - 1)
+  def calc_grid(alive_cells, size \\ @grid_size) do
+    for i <- 0..(size - 1) do
+      for j <- 0..(size - 1) do
+        a = for {^j, ^i} <- alive_cells do
+          true
+        end
+        case a do
+          [] -> false
+          [_] -> true
+        end
+      end
+    end
   end
 
 end
