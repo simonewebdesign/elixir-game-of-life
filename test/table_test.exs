@@ -3,15 +3,15 @@ defmodule TableTest do
   doctest Table
 
   @size 3
-  # @table """
-  # ╔═══╦═══╦═══╗
-  # ║   ║   ║   ║
-  # ╠═══╬═══╬═══╣
-  # ║   ║   ║   ║
-  # ╠═══╬═══╬═══╣
-  # ║   ║   ║   ║
-  # ╚═══╩═══╩═══╝
-  # """
+  @table """
+  ╔═══╦═══╦═══╗
+  ║   ║ █ ║   ║
+  ╠═══╬═══╬═══╣
+  ║   ║   ║ █ ║
+  ╠═══╬═══╬═══╣
+  ║ █ ║ █ ║ █ ║
+  ╚═══╩═══╩═══╝
+  """
   @header "╔═══╦═══╦═══╗"
   @center "║   ║   ║   ║"
   @middle "╠═══╬═══╬═══╣"
@@ -38,5 +38,12 @@ defmodule TableTest do
   test "center with data" do
     data = [false, true, false]
     assert @centre == Table.center(data, @size)
+  end
+
+  test "table" do
+    data = [[false, true, false],
+            [false, false, true],
+            [true, true, true]]
+    assert @table == Table.table(data, @size)
   end
 end

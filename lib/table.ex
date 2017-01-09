@@ -13,9 +13,20 @@ defmodule Table do
   @union_bottom "╩"
   @union_middle "╬"
 
-  def print() do
-    :ok
+
+  def print(data, size) do
+    IO.write table(data, size)
   end
+
+
+  def table(data, size) do
+    mid = data
+    |> Enum.map(&center(&1, size) <> "\n")
+    |> Enum.join(middle(size) <> "\n")
+
+    header(size) <> "\n" <> mid <> footer(size) <> "\n"
+  end
+
 
   def header(size) do
     @top_left <> do_header("", size)
