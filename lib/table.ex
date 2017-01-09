@@ -1,5 +1,4 @@
 defmodule Table do
-  import String, only: [duplicate: 2]
 
   @top_left "╔"
   @top_right "╗"
@@ -14,8 +13,9 @@ defmodule Table do
   @union_middle "╬"
 
 
-  def print(data, size) do
-    IO.write table(data, size)
+  @spec print(list(list)) :: :ok
+  def print(data) do
+    IO.write table(data, Enum.count(data))
   end
 
 
