@@ -22,15 +22,7 @@ defmodule Life do
   Generates the next grid.
   """
   def tick(grid) do
-    calc_next_grid(grid)
-  end
-
-
-  ## PRIVATE
-
-
-  def calc_next_grid(grid) do
-    Enum.reduce(alive_plus_neighbors(grid), MapSet.new, fn({x, y}, grid2) ->
+    Enum.reduce(alive_plus_neighbors(grid), MapSet.new, fn {x, y}, grid2 ->
       is_alive = MapSet.member?(grid, {x, y})
       num_neighbors = count_neighbors(grid, {x, y})
 
@@ -45,8 +37,8 @@ defmodule Life do
   defp alive_plus_neighbors(grid) do
     offsets = [{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 0}, {0, 1}, {1, -1}, {1, 0}, {1, 1}]
 
-    Enum.reduce(grid, MapSet.new, fn({x, y}, grid2) ->
-      Enum.reduce(offsets, grid2, fn({x_off, y_off}, grid3) ->
+    Enum.reduce(grid, MapSet.new, fn {x, y}, grid2 ->
+      Enum.reduce(offsets, grid2, fn {x_off, y_off}, grid3 ->
         MapSet.put(grid3, {x + x_off, y + y_off})
       end)
     end)
@@ -59,7 +51,7 @@ defmodule Life do
   defp count_neighbors(grid, {x, y}) do
     offsets = [{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}]
 
-    Enum.reduce(offsets, 0, fn({x_off, y_off}, acc) ->
+    Enum.reduce(offsets, 0, fn {x_off, y_off}, acc ->
       acc + if MapSet.member?(grid, {x + x_off, y + y_off}), do: 1, else: 0
     end)
   end
