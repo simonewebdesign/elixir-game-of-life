@@ -7,6 +7,7 @@ defmodule Life.Mixfile do
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     test_coverage: [tool: ExCoveralls],
      deps: deps()]
   end
 
@@ -30,7 +31,8 @@ defmodule Life.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:mix_test_watch, "~> 0.2", only: :dev},
-     {:dialyxir, "~> 0.4", only: [:dev], runtime: false}
+     {:dialyxir, "~> 0.4", only: [:dev], runtime: false},
+     {:excoveralls, "~> 0.6", only: :test},
     ]
   end
 end
