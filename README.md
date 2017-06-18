@@ -1,4 +1,4 @@
-# GameOfLife
+# Elixir Game of Life [![Build Status](https://travis-ci.org/simonewebdesign/elixir-game-of-life.svg?branch=master)](https://travis-ci.org/simonewebdesign/elixir-game-of-life) [![Coverage Status](https://coveralls.io/repos/github/simonewebdesign/elixir-game-of-life/badge.svg?branch=master)](https://coveralls.io/github/simonewebdesign/elixir-game-of-life?branch=master)
 
 Conway's Game of Life in Elixir
 
