@@ -32,10 +32,10 @@ defmodule Table do
     @top_left <> do_header("", size)
   end
 
-  def do_header(str, n) when n <= 1 do
+  defp do_header(str, n) when n <= 1 do
     str <> @line <> @top_right
   end
-  def do_header(str, n) do
+  defp do_header(str, n) do
     s = str <> @line <> @union_top
     do_header(s, n - 1)
   end
@@ -45,10 +45,10 @@ defmodule Table do
     @bottom_left <> do_footer("", size)
   end
 
-  def do_footer(str, n) when n <= 1 do
+  defp do_footer(str, n) when n <= 1 do
     str <> @line <> @bottom_right
   end
-  def do_footer(str, n) do
+  defp do_footer(str, n) do
     s = str <> @line <> @union_bottom
     do_footer(s, n - 1)
   end
@@ -58,10 +58,10 @@ defmodule Table do
     @pipe <> do_center(data, "", size)
   end
 
-  def do_center([h], str, n) when n <= 1 do
+  defp do_center([h], str, n) when n <= 1 do
     str <> cell(h)
   end
-  def do_center([h|t], str, n) do
+  defp do_center([h|t], str, n) do
     s = str <> cell(h)
     do_center(t, s, n - 1)
   end
@@ -71,10 +71,10 @@ defmodule Table do
     @middle_left <> do_middle("", size)
   end
 
-  def do_middle(str, n) when n <= 1 do
+  defp do_middle(str, n) when n <= 1 do
     str <> @line <> @middle_right
   end
-  def do_middle(str, n) do
+  defp do_middle(str, n) do
     s = str <> @line <> @union_middle
     do_middle(s, n - 1)
   end
