@@ -7,13 +7,15 @@ defmodule Life.CLI do
   def main([]) do
     loop(MapSet.new([]), @grid_size)
   end
+  def main(["glider", "--size=" <> grid_size]) do
+    loop(MapSet.new(@glider), String.to_integer(grid_size))
+  end
   def main(["glider"]) do
     loop(MapSet.new(@glider), @grid_size)
   end
   def main(["--size=" <> grid_size]) do
     loop(MapSet.new([]), String.to_integer(grid_size))
   end
-
 
   defp loop(alive_cells, grid_size, interval \\ @sleep_interval_ms) do
     alive_cells
