@@ -2,8 +2,33 @@ defmodule CLITest do
   use ExUnit.Case
   import ExUnit.CaptureIO
 
-  # credits to this website for the ASCII table: http://www.tablesgenerator.com/text_tables
-  @empty_grid """
+  # Credits for the ASCII tables: http://www.tablesgenerator.com/text_tables
+
+  @empty_grid_10x10 """
+  ╔═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╗
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╚═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╝
+  """
+
+  @empty_grid_3x3 """
   ╔═══╦═══╦═══╗
   ║   ║   ║   ║
   ╠═══╬═══╬═══╣
@@ -13,31 +38,67 @@ defmodule CLITest do
   ╚═══╩═══╩═══╝
   """
 
-  @grid_with_glider """
-  ╔═══╦═══╦═══╗
-  ║   ║ █ ║   ║
-  ╠═══╬═══╬═══╣
-  ║   ║   ║ █ ║
-  ╠═══╬═══╬═══╣
-  ║ █ ║ █ ║ █ ║
-  ╚═══╩═══╩═══╝
+  @grid_10x10_with_glider """
+  ╔═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╗
+  ║   ║ █ ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║ █ ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║ █ ║ █ ║ █ ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣
+  ║   ║   ║   ║   ║   ║   ║   ║   ║   ║   ║
+  ╚═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╝
   """
 
-  @tag :skip
-  test "prints an empty 3x3 grid" do
-    assert @empty_grid ==
+  test "with no args, prints an empty 10x10 grid" do
+    assert @empty_grid_10x10 ==
       capture_io(fn ->
-        assert :ok == Life.CLI.main([])
+        {:ok, pid} = Task.Supervisor.start_link()
+        task = Task.Supervisor.async(pid, fn ->
+          args = []
+          Task.start_link(Life.CLI.main(args))
+        end)
+        :timer.sleep(1)
+        Task.shutdown(task)
       end)
   end
 
-  @tag :skip
-  test "prints a 3x3 grid with a glider" do
-    grid = [{1, 0}, {2, 1}, {0, 2}, {1, 2}, {2, 2}]
-
-    assert @grid_with_glider ==
+  test "with --size=3 arg, prints an empty 3x3 grid" do
+    assert @empty_grid_3x3 ==
       capture_io(fn ->
-        assert :ok == Life.CLI.print(grid)
+        {:ok, pid} = Task.Supervisor.start_link()
+        task = Task.Supervisor.async(pid, fn ->
+          args = ["--size=3"]
+          Task.start_link(Life.CLI.main(args))
+        end)
+        :timer.sleep(1)
+        Task.shutdown(task)
       end)
   end
+
+  test "with glider arg, prints a 10x10 with a glider in the top-left corner" do
+    assert @grid_10x10_with_glider ==
+      capture_io(fn ->
+        {:ok, pid} = Task.Supervisor.start_link()
+        task = Task.Supervisor.async(pid, fn ->
+          args = ["glider"]
+          Task.start_link(Life.CLI.main(args))
+        end)
+        :timer.sleep(1)
+        Task.shutdown(task)
+      end)
+  end
+
 end
